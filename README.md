@@ -45,11 +45,7 @@ Download and run the code from your IDE or commandline.
 
 ## Known bug and how to fix it
 When the program keeps failing to download something it is likely due to pytube.exceptions.RegexMatchError.
-the fix -> open your IDE -> go to /venv/lib/site-packages/pytube -> change line 30 in cipher.py from ```var_regex = re.compile(r"^\w+\W")``` to ```var_regex = re.compile(r"^\$*\w+\W") ```
-
-## Contribution
-
-Contributions are welcome! If you encounter any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
+The fix -> open your IDE -> go to /venv/lib/site-packages/pytube -> change line 30 in cipher.py from ```var_regex = re.compile(r"^\w+\W")``` to ```var_regex = re.compile(r"^\$*\w+\W") ```
 
 ## Disclaimer
 
