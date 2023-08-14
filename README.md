@@ -17,7 +17,7 @@ You can quickly access your downloaded audio or video files using the "Show down
 
 1. Enter a valid YouTube URL in the input field.
 2. Choose whether you want to download the video in MP4 format or convert it to MP3.
-3. Click the "Download" button to initiate the process. The application will show you the progress and notify you when the download is complete.
+3. Click the "Download" button to initiate the process. The application will notify you when the download is complete.
 4. You can also click the "Clear" button to remove the entered URL from the input field.
 
 
