@@ -1,15 +1,15 @@
 # Youtube-To-Mp3
 A simple Youtube to mp3 and mp4 converter/downloader
 
-This Python application provides a graphical user interface (GUI) for downloading YouTube videos and converting them to MP3 format. It offers a user-friendly way to save your favorite videos as audio files for offline listening.
+This Python application provides a graphical user interface (GUI) for downloading YouTube videos (MP4 format) or converting them to MP3 format. It offers a user-friendly way to save your favorite videos for offline watching/listening.
 Enter a valid youtube url into the textfield, choose your file type (mp3 or mp4) and click download.
 You can quickly access your downloaded audio or video files using the "Show download Folder" buttons.
 
 
 ## Features
-- Download YouTube videos and convert them to MP3 format.
 - Choose between downloading the video in MP4 format or converting it to MP3.
 - Automatically organizes downloaded files into 'mp3' and 'mp4' folders under a 'yt_downloads' directory on your desktop.
+- Swiftly access your downloaded audio and video files via the "Show download Folder" buttons.
 - Provides a clean and intuitive user interface using the Tkinter library.
 - Supports threading to ensure a smooth and responsive user experience.
 
@@ -23,7 +23,7 @@ You can quickly access your downloaded audio or video files using the "Show down
 
 # Download and use the prebuilt app
 The official prebuilt windows app made from the code in main.py can be downloaded.
-Go to releases on this github page and download the YoutubeToMp3.zip file.
+Go to releases on this github page and download the YoutubeToMp3.zip file (https://github.com/PieWareTeam/Youtube-To-Mp3/releases).
 The app has been build using pyinstaller which is why it can be incorrectly seen as malware by Windows.
 More info:
 https://medium.com/@markhank/how-to-stop-your-python-programs-being-seen-as-malware-bfd7eb407a7#:~:text=Code%20compiled%20using%20pyinstaller%20or,ml.
