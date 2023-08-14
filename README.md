@@ -22,11 +22,10 @@ You can quickly access your downloaded audio or video files using the "Show down
 
 
 # Download and use the prebuilt app
-The official prebuilt windows app made from the code in main.py can be downloaded.
-Go to releases on this github page and download the YoutubeToMp3.zip file (https://github.com/PieWareTeam/Youtube-To-Mp3/releases).
+The official prebuilt windows app made from the code in main.py can be downloaded [here](https://github.com/PieWareTeam/Youtube-To-Mp3/releases).
+Download the YoutubeToMp3.zip file.
 The app has been build using pyinstaller which is why it can be incorrectly seen as malware by Windows.
-More info:
-https://medium.com/@markhank/how-to-stop-your-python-programs-being-seen-as-malware-bfd7eb407a7#:~:text=Code%20compiled%20using%20pyinstaller%20or,ml.
+[More info](https://medium.com/@markhank/how-to-stop-your-python-programs-being-seen-as-malware-bfd7eb407a7#:~:text=Code%20compiled%20using%20pyinstaller%20or,ml.)
 
 # Or run the code on your machine
 Download and run the code from your IDE or commandline.
