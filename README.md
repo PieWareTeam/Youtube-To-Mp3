@@ -10,7 +10,7 @@ You can quickly access your downloaded audio or video files using the "Show down
 - Choose between downloading the video in MP4 format or converting it to MP3.
 - Automatically organizes downloaded files into 'mp3' and 'mp4' folders under a 'yt_downloads' directory on your desktop.
 - Swiftly access your downloaded audio and video files via the "Show download Folder" buttons.
-- Provides a simple and intuitive user interface using the Tkinter library.
+- Provides a basic and intuitive user interface using the Tkinter library.
 - Supports threading to ensure a smooth and responsive user experience.
 
 ## How to Use
