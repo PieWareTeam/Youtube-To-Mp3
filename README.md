@@ -1,4 +1,4 @@
-# Youtube-To-Mp3
+# Youtube-To-Mp[3,4]
 A simple Youtube to mp3 and mp4 converter/downloader
 
 This Python application provides a graphical user interface (GUI) for downloading YouTube videos (MP4 format) or converting them to MP3 format. It offers a user-friendly way to save your favorite videos for offline watching/listening.
