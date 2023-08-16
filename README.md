@@ -44,7 +44,14 @@ Download and run the code from your IDE or commandline.
 
 ## Known bug and how to fix it
 When the program keeps failing to download something it is likely due to pytube.exceptions.RegexMatchError.
-The fix -> open your IDE -> go to /venv/lib/site-packages/pytube -> change line 30 in cipher.py from ```var_regex = re.compile(r"^\w+\W")``` to ```var_regex = re.compile(r"^\$*\w+\W") ```
+Try to find the cipher.py file and moddify line 30 from ```var_regex = re.compile(r"^\w+\W")``` to ```var_regex = re.compile(r"^\$*\w+\W") ```.
+Example:
+Open your IDE -> go to /venv/lib/site-packages/pytube -> change line 30 in cipher.py.
+
+
+## Build the application
+When you are done making changes to the code or adding some code, you can run [this](https://github.com/PieWareTeam/Youtube-To-Mp3/blob/master/pyinstallerCommand.txt) command in the root directory of the project
+to build the .exe file. Keep in mind that you might have to moddify the command depending on the changes you made to the project.
 
 ## Disclaimer
 
