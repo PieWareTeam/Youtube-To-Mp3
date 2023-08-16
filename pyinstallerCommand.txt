@@ -1,0 +1,1 @@
+pyinstaller --onefile --hidden-import pytube --hidden-import moviepy --noconsole --icon=./resources/logo.ico main.py
