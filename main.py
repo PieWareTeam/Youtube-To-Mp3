@@ -13,7 +13,7 @@ myappid = 'pieware.YoutubeToMp3.converter.1'
 ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
 # Set up paths for download folders
-DESKTOP_PATH = os.path.expanduser("~/Desktop")
+DESKTOP_PATH = os.path.expanduser("~\\Desktop")
 YT_DOWNLOADS_PATH = os.path.join(DESKTOP_PATH, "yt_downloads")
 MP3_PATH = os.path.join(YT_DOWNLOADS_PATH, "mp3")
 MP4_PATH = os.path.join(YT_DOWNLOADS_PATH, "mp4")
@@ -108,44 +108,47 @@ def on_download_button_click():
 
 
 # Create the main GUI window
-root = tk.Tk()
-root.title("YouTube Downloader")
-root.geometry("400x400")
+root = tk.Tk()  # Window
+root.title("YouTube To Mp[3,4]")
+root.geometry("730x400")
+root.minsize(730, 400)
 root.configure(bg="#292929")
 
 # Set up the style for GUI elements
 style = ttk.Style()
-style.configure("TLabel", font=("Helvetica", 12), background="#292929", foreground="white")
-style.configure("TButton", font=("Helvetica", 12), background="#555555", foreground="#4B0082")
-style.configure("TEntry", font=("Helvetica", 12), background="white", foreground="#4B0082")
+style.configure("TLabel", font=("Helvetica", 12, "bold"), background="#292929", foreground="#84C9Fb")
+style.configure("TButton", font=("Helvetica", 12), background="#000000", foreground="#000000",
+                borderwidth=0, focuscolor="#292929")
+style.map("TButton",
+          background=[("active", "#84C9Fb"), ("disabled", "#555555")],
+          foreground=[("active", "#292929")])
+style.configure("TEntry", font=("Helvetica", 12), background="white", foreground="#000000")
 
 # Create and place GUI elements
 url_label = ttk.Label(root, text="Enter YouTube URL:")
 url_label.pack(pady=(15, 0))
 
-url_entry = ttk.Entry(root, width=40)
-url_entry.pack()
-
-# Create a radio button for selecting download type
+# Create the urlFrame with the entry and the download type
+input_frame = ttk.Frame(master=root)
+url_entry = ttk.Entry(master=input_frame, width=40)
+# Create a radio buttons for selecting download type
 download_type_var = tk.StringVar(value="mp3")
-download_type_frame = ttk.Frame(root)
-download_type_frame.pack(pady=(10, 0))
+mp3_radio_button = ttk.Radiobutton(input_frame, text="MP3", variable=download_type_var, value="mp3")
+mp4_radio_button = ttk.Radiobutton(input_frame, text="MP4", variable=download_type_var, value="mp4")
 
-download_type_label = ttk.Label(download_type_frame, text="Choose Download Type:")
-download_type_label.grid(row=0, column=0, padx=5)
+url_entry.pack(side='left')
+mp3_radio_button.pack(side='left')
+mp4_radio_button.pack()
+input_frame.pack(pady=5)
 
-mp3_radio_button = ttk.Radiobutton(download_type_frame, text="MP3", variable=download_type_var, value="mp3")
-mp3_radio_button.grid(row=0, column=1, padx=5)
 
-mp4_radio_button = ttk.Radiobutton(download_type_frame, text="MP4", variable=download_type_var, value="mp4")
-mp4_radio_button.grid(row=0, column=2, padx=5)
-
+# Create download button
 download_button = ttk.Button(root, text="Download", command=on_download_button_click)
 download_button.pack(pady=(10, 0))
 
 # Create the Clear button to clear the URL entry
 clear_button = ttk.Button(root, text="Clear", command=clear_url_field)
-clear_button.pack(pady=(10, 0))
+clear_button.pack(pady=(10, 50))
 
 # Initialize the download_in_progress flag
 download_in_progress = False
@@ -158,13 +161,13 @@ download_type_labels = {"mp3": "Downloaded mp3 files will be saved in:",
 for download_type, label_text in download_type_labels.items():
     destination_label_text = f"{label_text} {MP3_PATH}" if download_type == "mp3" else f"{label_text} {MP4_PATH}"
     destination_label = ttk.Label(root, text=destination_label_text)
-    destination_label.pack(pady=(15, 0))
+    destination_label.pack(pady=(10, 0))
 
     # Create the "Show" button to open the file location
     show_button = ttk.Button(root, text=f"Show {download_type} download Folder",
                              command=lambda dt=download_type: open_file_location(
                                  os.path.expanduser(MP3_PATH if dt == "mp3" else MP4_PATH)))
-    show_button.pack(pady=(10, 0))
+    show_button.pack(pady=(10, 25))
 
 # Start the GUI event loop
 root.mainloop()
