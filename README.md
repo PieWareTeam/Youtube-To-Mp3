@@ -32,7 +32,7 @@ You can quickly access your downloaded audio or video files using the "Show down
 
 
 # Download and use the prebuilt app
-The official prebuilt windows app made from the code in main.py can be downloaded [here](https://github.com/PieWareTeam/Youtube-To-Mp3/releases/tag/v01.8).
+The official prebuilt windows app made from the code in main.py can be downloaded [here](https://github.com/PieWareTeam/Youtube-To-Mp3/releases).
 Download the setup file, run it and follow the steps.
 All of the code is open source and can be viewed [here](https://github.com/PieWareTeam/Youtube-To-Mp3/blob/master/main.py)
 
