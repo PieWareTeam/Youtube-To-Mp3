@@ -5,8 +5,11 @@ import subprocess
 import threading
 from tkinter import messagebox, ttk
 from pytube import YouTube
+from pytube import Playlist
 from datetime import datetime
 import ctypes
+import queue
+
 
 # Set the Windows application ID for taskbar grouping
 myappid = 'pieware.YoutubeToMp3.converter.1'
@@ -17,6 +20,9 @@ DESKTOP_PATH = os.path.expanduser("~\\Desktop")
 YT_DOWNLOADS_PATH = os.path.join(DESKTOP_PATH, "yt_downloads")
 MP3_PATH = os.path.join(YT_DOWNLOADS_PATH, "mp3")
 MP4_PATH = os.path.join(YT_DOWNLOADS_PATH, "mp4")
+
+playlist_queue = queue.Queue()
+
 
 
 # Function to display pop-up messages
@@ -69,7 +75,8 @@ def download_media(url, media_type, format_function, success_message):
             print(f"Downloading {media_type}: {media.title}")
             stream.download(output_path=download_folder, filename=new_file_name)
 
-            throw_popup("Completed successfully", f"{success_message}: {new_file_name}", False)
+            if not playlist_checkbox_var.get():
+                throw_popup("Completed successfully", f"{success_message}: {new_file_name}", False)
         else:
             throw_popup("Error", f"No {media_type} stream found for the provided URL")
     except Exception:
@@ -86,6 +93,7 @@ def download_button_click_async(url, download_type):
     try:
         download_in_progress = True
         download_button.config(state=tk.DISABLED, text="Downloading...")
+        playlist_checkbox.config(state="disabled")
 
         if download_type == "mp3":
             download_media(url, "mp3", lambda media: media.streams.filter(only_audio=True).first(),
@@ -96,22 +104,46 @@ def download_button_click_async(url, download_type):
     finally:
         download_in_progress = False
         download_button.config(state=tk.NORMAL, text="Download")
+        playlist_checkbox.config(state="normal")
+
+
+def download_playlist(url):
+    try:
+        playlist = Playlist(url)
+
+        for video in playlist.videos:
+            playlist_queue.put(video.watch_url)
+
+    except Exception:
+        throw_popup("Error", "Invalid YouTube playlist URL")
+
+
+def download_playlist_worker(media_type):
+    while not playlist_queue.empty():
+        video_url = playlist_queue.get()
+        download_button_click_async(video_url, media_type)
+        playlist_queue.task_done()
+    throw_popup("Playlist", "Downloaded", False)
 
 
 # Function to handle download button click
 def on_download_button_click():
     url = url_entry.get()
-    download_type = download_type_var.get()
-
     if url:
-        threading.Thread(target=download_button_click_async, args=(url, download_type)).start()
+        download_type = download_type_var.get()
+        if playlist_checkbox_var.get():
+            download_playlist(url)
+            threading.Thread(target=download_playlist_worker, args=(download_type,)).start()
+        else:
+            threading.Thread(target=download_button_click_async, args=(url, download_type)).start()
+
 
 
 # Create the main GUI window
 root = tk.Tk()  # Window
 root.title("YouTube To Mp[3,4]")
-root.geometry("730x400")
-root.minsize(730, 400)
+root.geometry("730x450")
+root.minsize(730, 450)
 root.configure(bg="#292929")
 
 # Set up the style for GUI elements
@@ -141,6 +173,11 @@ mp3_radio_button.pack(side='left')
 mp4_radio_button.pack()
 input_frame.pack(pady=5)
 
+
+# Create a variable to store the state of the checkbox
+playlist_checkbox_var = tk.IntVar()
+playlist_checkbox = tk.Checkbutton(root, text="Playlist", variable=playlist_checkbox_var)
+playlist_checkbox.pack(pady=5)
 
 # Create download button
 download_button = ttk.Button(root, text="Download", command=on_download_button_click)
