@@ -80,7 +80,8 @@ def download_media(url, media_type, format_function, success_message):
         else:
             throw_popup("Error", f"No {media_type} stream found for the provided URL")
     except Exception:
-        throw_popup("Error", "Invalid YouTube URL")
+        if not playlist_checkbox_var.get():
+            throw_popup("Error", "Invalid YouTube URL")
 
 
 # Function to handle asynchronous download button click
@@ -146,8 +147,8 @@ def on_download_button_click():
 # Create the main GUI window
 root = tk.Tk()  # Window
 root.title("YouTube To Mp[3,4]")
-root.geometry("730x450")
-root.minsize(730, 450)
+root.geometry("730x550")
+root.minsize(730, 550)
 root.configure(bg="#292929")
 
 # Set up the style for GUI elements
