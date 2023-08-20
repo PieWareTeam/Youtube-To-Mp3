@@ -21,6 +21,8 @@ YT_DOWNLOADS_PATH = os.path.join(DESKTOP_PATH, "yt_downloads")
 MP3_PATH = os.path.join(YT_DOWNLOADS_PATH, "mp3")
 MP4_PATH = os.path.join(YT_DOWNLOADS_PATH, "mp4")
 
+PLAYLIST_PATH = ""
+
 playlist_queue = queue.Queue()
 
 
@@ -65,6 +67,8 @@ def download_media(url, media_type, format_function, success_message):
         if stream:
             # Determine the download folder based on media type
             download_folder = MP3_PATH if media_type == "mp3" else MP4_PATH
+            if playlist_checkbox_var.get():
+                download_folder = download_folder+"\\"+PLAYLIST_PATH
             if not os.path.exists(download_folder):
                 os.makedirs(download_folder)
 
@@ -95,6 +99,8 @@ def download_button_click_async(url, download_type):
         download_in_progress = True
         download_button.config(state=tk.DISABLED, text="Downloading...")
         playlist_checkbox.config(state="disabled")
+        mp4_radio_button.config(state=tk.DISABLED)
+        mp3_radio_button.config(state=tk.DISABLED)
 
         if download_type == "mp3":
             download_media(url, "mp3", lambda media: media.streams.filter(only_audio=True).first(),
@@ -105,15 +111,21 @@ def download_button_click_async(url, download_type):
     finally:
         download_in_progress = False
         download_button.config(state=tk.NORMAL, text="Download")
+        mp4_radio_button.config(state=tk.NORMAL)
+        mp3_radio_button.config(state=tk.NORMAL)
         playlist_checkbox.config(state="normal")
         download_status_label.config(text="Download completed")  # Update the status label
 
 
 
 def download_playlist(url):
-    try:
-        playlist = Playlist(url)
+    global PLAYLIST_PATH
 
+    try:
+        # Generate a unique filename using timestamp
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        playlist = Playlist(url)
+        PLAYLIST_PATH = f"{playlist.title}_{timestamp}"
         for video in playlist.videos:
             playlist_queue.put(video.watch_url)
 
@@ -122,6 +134,7 @@ def download_playlist(url):
 
 
 def download_playlist_worker(media_type):
+
     while not playlist_queue.empty():
         video_url = playlist_queue.get()
         download_button_click_async(video_url, media_type)
