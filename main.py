@@ -105,6 +105,8 @@ def download_button_click_async(url, download_type):
         download_in_progress = False
         download_button.config(state=tk.NORMAL, text="Download")
         playlist_checkbox.config(state="normal")
+        download_status_label.config(text="Download completed")  # Update the status label
+
 
 
 def download_playlist(url):
@@ -123,7 +125,9 @@ def download_playlist_worker(media_type):
         video_url = playlist_queue.get()
         download_button_click_async(video_url, media_type)
         playlist_queue.task_done()
+        download_status_label.config(text=f"Downloading: {playlist_queue.qsize()} files remaining")
     throw_popup("Playlist", "Downloaded", False)
+    download_status_label.config(text="Download completed")  # Update the status label after playlist download
 
 
 # Function to handle download button click
@@ -185,7 +189,13 @@ download_button.pack(pady=(10, 0))
 
 # Create the Clear button to clear the URL entry
 clear_button = ttk.Button(root, text="Clear", command=clear_url_field)
-clear_button.pack(pady=(10, 50))
+clear_button.pack(pady=(10, 0))
+
+
+download_status_label = ttk.Label(root, text="", font=("Helvetica", 10))
+download_status_label.pack(pady=(10, 50))
+
+
 
 # Initialize the download_in_progress flag
 download_in_progress = False
