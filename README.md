@@ -8,21 +8,31 @@ You can quickly access your downloaded audio or video files using the "Show down
 
 ## Features
 - Choose between downloading the video in MP4 format or converting it to MP3.
+- Automatically download entire playlists
 - Automatically organizes downloaded files into 'mp3' and 'mp4' folders under a 'yt_downloads' directory on your desktop.
 - Swiftly access your downloaded audio and video files via the "Show download Folder" buttons.
 - Provides a basic and intuitive user interface using the Tkinter library.
 - Supports threading to ensure a smooth and responsive user experience.
 
-## How to Use
+# How to Use
 
+## Single video
 1. Enter a valid YouTube URL in the input field.
 2. Choose whether you want to download the video in MP4 format or convert it to MP3.
 3. Click the "Download" button to initiate the process. The application will notify you when the download is complete.
-4. You can also click the "Clear" button to remove the entered URL from the input field.
+
+## Entire playlist
+1. Enter a valid YouTube playlist URL in the input field.
+2. Choose whether you want to download the videos in MP4 format or convert it to MP3.
+3. Make sure the "Playlist" checkbox is checked
+4. Click the "Download" button to initiate the process. The application will notify you when the download is complete.
+5. The amount of files that still have to be downloaded will be displayed and updated automatically
+6. side info: The playlist has to be public on Youtube for the program to access and download it
+
 
 
 # Download and use the prebuilt app
-The official prebuilt windows app made from the code in main.py can be downloaded [here](https://github.com/PieWareTeam/Youtube-To-Mp3/releases/tag/v01.6).
+The official prebuilt windows app made from the code in main.py can be downloaded [here](https://github.com/PieWareTeam/Youtube-To-Mp3/releases/tag/v01.8).
 Download the setup file, run it and follow the steps.
 All of the code is open source and can be viewed [here](https://github.com/PieWareTeam/Youtube-To-Mp3/blob/master/main.py)
 
